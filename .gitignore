@@ -19,6 +19,45 @@ notebooks/preprocessing/.ipynb_checkpoints/
 notebooks/.ipynb_checkpoints/
 .ipynb_checkpoints/
 
+# R
+.Rhistory
+.Rapp.history
+.Rproj.user/
+.RData
+.Ruserdata
+
+# R Markdown
+*.html
+*.pdf
+
+# R Shiny
+.Renviron
+
+# Packrat
+packrat/
+
+# R environment
+.Renviron
+.Rproj.user/
+
+# R package
+*.tar.gz
+*.Rcheck/
+
+# R profiling
+.Rprof
+.Rprofraw
+
+# RStudio
+.Rproj.user/
+
+# knitr and R markdown default cache directories
+*_cache/
+*_files/
+
+# RStudio
+.Rproj.user/
+
 # Virtual environments
 venv/
 env/
