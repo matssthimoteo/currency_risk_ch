@@ -1,0 +1,92 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyc
+
+# Jupyter Notebooks
+notebooks/
+notebooks/analysis/.ipynb_checkpoints/
+notebooks/evaluation/.ipynb_checkpoints/
+notebooks/exploratory/.ipynb_checkpoints/
+notebooks/modeling/.ipynb_checkpoints/
+notebooks/preprocessing/.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+__env__/
+env.bak/
+env1/
+venv1/
+myenv/
+.venv/
+
+# Conda
+.env/
+
+# Data
+data/raw/
+data/processed/
+data/interim/
+data/external/
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# IDE settings
+.vscode/
+.idea/
+
+# Compiled Python modules
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+
+# Environment
+.env
+env/
+venv/
+ENV/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+System Volume Information/
+
+# Linux
+lost+found/
+
+# Reference books/papers folder
+references/
