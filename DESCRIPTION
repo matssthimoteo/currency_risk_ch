@@ -1,0 +1,13 @@
+Package: mypackage
+Type: Package
+Title: My Package
+Version: 0.1.0
+Authors@R: person("Author", "Name", email = "author@example.com", role = c("aut", "cre"))
+Description: A brief description of my package.
+License: What license it uses
+Depends:
+    R (>= 3.0.0)
+Imports:
+    reader,
+    tidyverse,
+    stargazer
