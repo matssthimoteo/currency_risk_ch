@@ -42,17 +42,17 @@ CHF_InterestRate <- monthly_data$CHFi
 n <- 12
 
 # Calculate the one-month forward rate
-monthly_data$ForwardRate_EUR <- monthly_data$EUR * (1 + monthly_data$EURi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_USD <- monthly_data$USD * (1 + monthly_data$USDi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_JPY <- monthly_data$JPY * (1 + monthly_data$JPYi/n)^n * (1 + CHF_InterestRate/n)^(-n)
+monthly_data$ForwardRate_EUR <- monthly_data$EUR * (1 + monthly_data$EURi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_USD <- monthly_data$USD * (1 + monthly_data$USDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_JPY <- monthly_data$JPY * (1 + monthly_data$JPYi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
 
-monthly_data$ForwardRate_GBP <- monthly_data$GBP * (1 + monthly_data$GBPi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_AUD <- monthly_data$AUD * (1 + monthly_data$AUDi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_CAD <- monthly_data$CAD * (1 + monthly_data$CADi/n)^n * (1 + CHF_InterestRate/n)^(-n)
+monthly_data$ForwardRate_GBP <- monthly_data$GBP * (1 + monthly_data$GBPi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_AUD <- monthly_data$AUD * (1 + monthly_data$AUDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_CAD <- monthly_data$CAD * (1 + monthly_data$CADi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
 
-monthly_data$ForwardRate_NZD <- monthly_data$NZD * (1 + monthly_data$NZDi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_SEK <- monthly_data$SEK * (1 + monthly_data$SEKi/n)^n * (1 + CHF_InterestRate/n)^(-n)
-monthly_data$ForwardRate_NOK <- monthly_data$NOK * (1 + monthly_data$NOKi/n)^n * (1 + CHF_InterestRate/n)^(-n)
+monthly_data$ForwardRate_NZD <- monthly_data$NZD * (1 + monthly_data$NZDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_SEK <- monthly_data$SEK * (1 + monthly_data$SEKi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
+monthly_data$ForwardRate_NOK <- monthly_data$NOK * (1 + monthly_data$NOKi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n)
 
 
 
