@@ -7,7 +7,7 @@ import json
 start_date = pd.Timestamp('2002-04-01')
 end_date = pd.Timestamp('2023-10-31')
 
-# URL for the SNB exchange rate data
+# URL for the OECD short-term interesrate data
 url = f"https://stats.oecd.org/sdmx-json/data/DP_LIVE/AUS+CAN+CHE+EA19+GBR+JPN+NOR+NZL+SWE+USA.STINT.TOT.PC_PA.M/OECD?json-lang=en&dimensionAtObservation=allDimensions&startPeriod={start_date.year}"
 
 ccy_from_country = dict(pd.Series(['AUD', 'CAD', 'CHF', 'EUR', 'GBP', 'JPY', 'NOK', 'NZD', 'SEK', 'USD'],
