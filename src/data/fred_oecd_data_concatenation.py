@@ -1,4 +1,4 @@
-mport pandas as pd
+import pandas as pd
 
 # Load separate data FRED/OECD
 fred_df = pd.read_csv('data/interim/monthly_data_fred.csv')
