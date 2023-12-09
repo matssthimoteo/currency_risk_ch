@@ -177,6 +177,13 @@ dw_test_NZD
 dw_test_SEK 
 dw_test_NOK 
 
+# Open sink connection to save stargazer output to a file
+sink("tables/regression_table.tex")
 
+# Your stargazer output
+stargazer(models_list, title = "Regression Results", align = TRUE, type = "latex")
+
+# Close the sink connection
+sink()
 
 
