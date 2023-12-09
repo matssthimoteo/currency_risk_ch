@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     # Set start and end dates
     start_date = pd.Timestamp('2002-04-01')
     end_date = pd.Timestamp('2023-10-31')
