@@ -2,8 +2,10 @@
 # Monthly_data analysis
 library(dplyr)
 library(readr)
-monthly_data <- read_csv("Desktop/currency/dernier data/monthly_data.csv")
-head(monthly_data)
+library(lmtest)
+
+monthly_data <- read_csv("data/processed/monthly_data.csv")
+View(monthly_data)
 
 # ____
 
