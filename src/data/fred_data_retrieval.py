@@ -3,7 +3,11 @@ import pandas as pd
 import numpy as np
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
+    # Set start and end dates
+    start_date = pd.Timestamp('2002-04-01')
+    end_date = pd.Timestamp('2023-10-31')
+
     # Set FRED API key
     api_key = '41641234dac871704cd09b2b8dd163ac'
 
@@ -19,16 +23,7 @@ if __name__ == '__main__':
         'USDSEK': 'DEXSDUS',
         'USDNOK': 'DEXNOUS',
         'VIX': 'VIXCLS',
-        'CHFi': 'IRSTCI01CHM156N',
-        'USDi': 'IRSTCI01USM156N',
-        'EURi': 'IRSTCI01EZM156N',
-        'JPYi': 'IRSTCI01JPM156N',
-        'GBPi': 'IRSTCI01GBM156N',
-        'AUDi': 'IRSTCI01AUM156N',
-        'CADi': 'IRSTCI01CAM156N',
-        'NZDi': 'IRSTCI01NZM156N',
-        'SEKi': 'IRSTCI01SEM156N',
-        'NOKi': 'IRSTCI01NOM156N'
+
     }
 
     # Dataframe to save results
@@ -70,7 +65,7 @@ for column in df.columns:
     if not column == 'date':
         df[column] = df[column].map(lambda x: np.nan if x=='.' else x)
         df[column] = df[column].map(lambda x: float(x))
-df = df.sort_index().loc['1999-01-02':]
+df = df.sort_index().loc[start_date:end_date]
 
 currencies_list = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'NZD', 'SEK', 'NOK']
 df_chf = pd.DataFrame(columns=currencies_list , index=df.index, dtype=float)
@@ -86,10 +81,8 @@ df_chf['SEK'] = df['USDCHF'] / df['USDSEK']
 df_chf['NOK'] = df['USDCHF'] / df['USDNOK']
 df_chf['VIX'] = df['VIX']
 
-for ccy in currencies_list:
-    df_chf[ccy + 'i'] = df[ccy + 'i']
-df_chf['CHFi'] = df['CHFi']
+
 
 # Export data to csvs
-df_chf.to_csv('data/processed/daily_data.csv')
-df_chf.resample('M').last().to_csv('data/processed/monthly_data.csv')
+df_chf.to_csv('data/interim/daily_data_fred.csv')
+df_chf.resample('M').last().to_csv('data/interim/monthly_data_fred.csv')
