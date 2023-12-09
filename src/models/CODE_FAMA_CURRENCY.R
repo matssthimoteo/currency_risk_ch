@@ -10,7 +10,7 @@ head(monthly_data)
 #_______________________VIX
 # we have to take the difference and log it
 
-monthly_data$delta_Log_VIX <- ( log(monthly_data$VIX)/lag(log(monthly_data$VIX)) ) -1
+monthly_data$delta_Log_VIX <-  log(monthly_data$VIX)-lag(log(monthly_data$VIX)) 
 
 # ________________AFX
 # EURO
@@ -60,17 +60,17 @@ CHF_InterestRate <- monthly_data$CHFi
 n <- 12
 
 # Calculate the one-month log forward rate
-monthly_data$ForwardRate_EUR <- log(monthly_data$EUR * (1 + monthly_data$EURi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_USD <- log(monthly_data$USD * (1 + monthly_data$USDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_JPY <- log(monthly_data$JPY * (1 + monthly_data$JPYi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
+monthly_data$ForwardRate_EUR <- log(monthly_data$EUR * (1 + monthly_data$EURi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_USD <- log(monthly_data$USD * (1 + monthly_data$USDi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_JPY <- log(monthly_data$JPY * (1 + monthly_data$JPYi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
 
-monthly_data$ForwardRate_GBP <- log(monthly_data$GBP * (1 + monthly_data$GBPi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_AUD <- log(monthly_data$AUD * (1 + monthly_data$AUDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_CAD <- log(monthly_data$CAD * (1 + monthly_data$CADi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
+monthly_data$ForwardRate_GBP <- log(monthly_data$GBP * (1 + monthly_data$GBPi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_AUD <- log(monthly_data$AUD * (1 + monthly_data$AUDi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_CAD <- log(monthly_data$CAD * (1 + monthly_data$CADi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
 
-monthly_data$ForwardRate_NZD <- log(monthly_data$NZD * (1 + monthly_data$NZDi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_SEK <- log(monthly_data$SEK * (1 + monthly_data$SEKi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
-monthly_data$ForwardRate_NOK <- log(monthly_data$NOK * (1 + monthly_data$NOKi/100)^(1/n) * (1 + CHF_InterestRate/100)^(-1/n))
+monthly_data$ForwardRate_NZD <- log(monthly_data$NZD * (1 + monthly_data$NZDi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_SEK <- log(monthly_data$SEK * (1 + monthly_data$SEKi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
+monthly_data$ForwardRate_NOK <- log(monthly_data$NOK * (1 + monthly_data$NOKi/100)^(-1/n) * (1 + CHF_InterestRate/100)^(1/n))
 
 # LOG spot
 
@@ -101,21 +101,34 @@ monthly_data$F_S_NZD <- monthly_data$ForwardRate_NZD - monthly_data$log_spot_NZD
 monthly_data$F_S_SEK <- monthly_data$ForwardRate_SEK - monthly_data$log_spot_SEK
 monthly_data$F_S_NOK <- monthly_data$ForwardRate_NOK - monthly_data$log_spot_NOK 
 
+# difflog  of the spot
+monthly_data$Log_diff_spot_EUR <-  log(monthly_data$EUR)-lag(log(monthly_data$EUR))
+monthly_data$Log_diff_spot_USD <-  log(monthly_data$USD)-lag(log(monthly_data$USD)) 
+monthly_data$Log_diff_spot_JPY <-  log(monthly_data$JPY)-lag(log(monthly_data$JPY)) 
+
+monthly_data$Log_diff_spot_GBP <-  log(monthly_data$GBP)-lag(log(monthly_data$GBP)) 
+monthly_data$Log_diff_spot_AUD <-  log(monthly_data$AUD)-lag(log(monthly_data$AUD)) 
+monthly_data$Log_diff_spot_CAD <-  log(monthly_data$CAD)-lag(log(monthly_data$CAD)) 
+
+monthly_data$Log_diff_spot_NZD <-  log(monthly_data$NZD)-lag(log(monthly_data$NZD)) 
+monthly_data$Log_diff_spot_SEK <-  log(monthly_data$SEK)-lag(log(monthly_data$SEK)) 
+monthly_data$Log_diff_spot_NOK <-  log(monthly_data$NOK)-lag(log(monthly_data$NOK)) 
+
 
 
 #  Final regression
 
-Reg_EUR <- lm(monthly_data$EUR  ~ monthly_data$F_S_EUR + monthly_data$delta_Log_VIX + monthly_data$AFX_EUR)
-Reg_USD <- lm(monthly_data$USD  ~ monthly_data$F_S_USD + monthly_data$delta_Log_VIX + monthly_data$AFX_USD)
-Reg_JPY <- lm(monthly_data$JPY  ~ monthly_data$F_S_JPY + monthly_data$delta_Log_VIX + monthly_data$AFX_JPY)
+Reg_EUR <- lm(monthly_data$Log_diff_spot_EUR  ~ monthly_data$F_S_EUR + monthly_data$delta_Log_VIX + monthly_data$AFX_EUR)
+Reg_USD <- lm(monthly_data$Log_diff_spot_USD  ~ monthly_data$F_S_USD + monthly_data$delta_Log_VIX + monthly_data$AFX_USD)
+Reg_JPY <- lm(monthly_data$Log_diff_spot_JPY  ~ monthly_data$F_S_JPY + monthly_data$delta_Log_VIX + monthly_data$AFX_JPY)
 
-Reg_GBP <- lm(monthly_data$GBP  ~ monthly_data$F_S_GBP + monthly_data$delta_Log_VIX + monthly_data$AFX_GBP)
-Reg_AUD <- lm(monthly_data$AUD  ~ monthly_data$F_S_AUD + monthly_data$delta_Log_VIX + monthly_data$AFX_AUD)
-Reg_CAD <- lm(monthly_data$CAD  ~ monthly_data$F_S_CAD + monthly_data$delta_Log_VIX + monthly_data$AFX_CAD)
+Reg_GBP <- lm(monthly_data$Log_diff_spot_GBP  ~ monthly_data$F_S_GBP + monthly_data$delta_Log_VIX + monthly_data$AFX_GBP)
+Reg_AUD <- lm(monthly_data$Log_diff_spot_AUD  ~ monthly_data$F_S_AUD + monthly_data$delta_Log_VIX + monthly_data$AFX_AUD)
+Reg_CAD <- lm(monthly_data$Log_diff_spot_CAD  ~ monthly_data$F_S_CAD + monthly_data$delta_Log_VIX + monthly_data$AFX_CAD)
 
-Reg_NZD <- lm(monthly_data$NZD  ~ monthly_data$F_S_NZD + monthly_data$delta_Log_VIX + monthly_data$AFX_NZD)
-Reg_SEK <- lm(monthly_data$SEK  ~ monthly_data$F_S_SEK + monthly_data$delta_Log_VIX + monthly_data$AFX_SEK)
-Reg_NOK <- lm(monthly_data$NOK  ~ monthly_data$F_S_NOK + monthly_data$delta_Log_VIX + monthly_data$AFX_NOK)
+Reg_NZD <- lm(monthly_data$Log_diff_spot_NZD  ~ monthly_data$F_S_NZD + monthly_data$delta_Log_VIX + monthly_data$AFX_NZD)
+Reg_SEK <- lm(monthly_data$Log_diff_spot_SEK  ~ monthly_data$F_S_SEK + monthly_data$delta_Log_VIX + monthly_data$AFX_SEK)
+Reg_NOK <- lm(monthly_data$Log_diff_spot_NOK  ~ monthly_data$F_S_NOK + monthly_data$delta_Log_VIX + monthly_data$AFX_NOK)
 
 
 # Startgazer
