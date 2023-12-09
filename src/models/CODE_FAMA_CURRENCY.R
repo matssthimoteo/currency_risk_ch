@@ -145,4 +145,38 @@ stargazer(models_list, title = "Regression Results", align = TRUE, type = "html"
 
 
 
+#  Durbin watson test 
+
+
+# Perform the Durbin-Watson test
+dw_test_EUR <- dwtest(Reg_EUR)
+dw_test_USD <- dwtest(Reg_USD)
+dw_test_JPY <- dwtest(Reg_JPY)
+
+dw_test_GBP <- dwtest(Reg_GBP)
+dw_test_AUD <- dwtest(Reg_AUD)
+dw_test_CAD <- dwtest(Reg_CAD)
+
+dw_test_NZD <- dwtest(Reg_NZD)
+dw_test_SEK <- dwtest(Reg_SEK)
+dw_test_NOK <- dwtest(Reg_NOK)
+
+
+# Print the test results
+
+
+dw_test_EUR 
+dw_test_USD 
+dw_test_JPY 
+
+dw_test_GBP 
+dw_test_AUD 
+dw_test_CAD 
+
+dw_test_NZD
+dw_test_SEK 
+dw_test_NOK 
+
+
+
 
