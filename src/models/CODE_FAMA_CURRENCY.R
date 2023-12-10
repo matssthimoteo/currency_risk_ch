@@ -1,11 +1,27 @@
+#library(renv)
+install.packages("renv")
+renv::restore()
+# renv::install(c("dplyr", "readr", "lmtest", "stargazer"))
+
+
+
+# library(renv)
+# activate()
+# 
+# renv::install("dplyr")
+# renv::install("readr")
+# renv::install("lmtest")
+# renv::install("stargazer")
+
 
 # Monthly_data analysis
 library(dplyr)
 library(readr)
 library(lmtest)
+library(stargazer)
 
 monthly_data <- read_csv("data/processed/monthly_data.csv")
-View(monthly_data)
+#View(monthly_data)
 
 # ____
 
@@ -15,7 +31,7 @@ View(monthly_data)
 monthly_data$delta_Log_VIX <-  log(monthly_data$VIX)-lag(log(monthly_data$VIX)) 
 
 # ________________AFX
-# EURO
+
 
 
 # c'est ça mais c'est une apporximation
@@ -54,8 +70,8 @@ monthly_data$AFX_NOK <- rowMeans(monthly_data[, c("ir_USD", "ir_JPY", "ir_GBP", 
 
 # ________________FORWARD DISCOUNT
 
-SpotRate <- monthly_data$EUR
-EUR_InterestRate <- monthly_data$EURi
+# assumptionS
+
 CHF_InterestRate <- monthly_data$CHFi
 
 # Number of compounding periods
@@ -103,45 +119,52 @@ monthly_data$F_S_NZD <- monthly_data$ForwardRate_NZD - monthly_data$log_spot_NZD
 monthly_data$F_S_SEK <- monthly_data$ForwardRate_SEK - monthly_data$log_spot_SEK
 monthly_data$F_S_NOK <- monthly_data$ForwardRate_NOK - monthly_data$log_spot_NOK 
 
-# difflog  of the spot
-monthly_data$Log_diff_spot_EUR <-  log(monthly_data$EUR)-lag(log(monthly_data$EUR))
-monthly_data$Log_diff_spot_USD <-  log(monthly_data$USD)-lag(log(monthly_data$USD)) 
-monthly_data$Log_diff_spot_JPY <-  log(monthly_data$JPY)-lag(log(monthly_data$JPY)) 
+# difflog  of the spot, change Log_diff_spot_XXX by XXX_
+monthly_data$EUR_ <-  log(monthly_data$EUR)-lag(log(monthly_data$EUR))
+monthly_data$USD_ <-  log(monthly_data$USD)-lag(log(monthly_data$USD)) 
+monthly_data$JPY_ <-  log(monthly_data$JPY)-lag(log(monthly_data$JPY)) 
 
-monthly_data$Log_diff_spot_GBP <-  log(monthly_data$GBP)-lag(log(monthly_data$GBP)) 
-monthly_data$Log_diff_spot_AUD <-  log(monthly_data$AUD)-lag(log(monthly_data$AUD)) 
-monthly_data$Log_diff_spot_CAD <-  log(monthly_data$CAD)-lag(log(monthly_data$CAD)) 
+monthly_data$GBP_ <-  log(monthly_data$GBP)-lag(log(monthly_data$GBP)) 
+monthly_data$AUD_ <-  log(monthly_data$AUD)-lag(log(monthly_data$AUD)) 
+monthly_data$CAD_ <-  log(monthly_data$CAD)-lag(log(monthly_data$CAD)) 
 
-monthly_data$Log_diff_spot_NZD <-  log(monthly_data$NZD)-lag(log(monthly_data$NZD)) 
-monthly_data$Log_diff_spot_SEK <-  log(monthly_data$SEK)-lag(log(monthly_data$SEK)) 
-monthly_data$Log_diff_spot_NOK <-  log(monthly_data$NOK)-lag(log(monthly_data$NOK)) 
+monthly_data$NZD_ <-  log(monthly_data$NZD)-lag(log(monthly_data$NZD)) 
+monthly_data$SEK_ <-  log(monthly_data$SEK)-lag(log(monthly_data$SEK)) 
+monthly_data$NOK_ <-  log(monthly_data$NOK)-lag(log(monthly_data$NOK)) 
 
 
 
 #  Final regression
 
-Reg_EUR <- lm(monthly_data$Log_diff_spot_EUR  ~ monthly_data$F_S_EUR + monthly_data$delta_Log_VIX + monthly_data$AFX_EUR)
-Reg_USD <- lm(monthly_data$Log_diff_spot_USD  ~ monthly_data$F_S_USD + monthly_data$delta_Log_VIX + monthly_data$AFX_USD)
-Reg_JPY <- lm(monthly_data$Log_diff_spot_JPY  ~ monthly_data$F_S_JPY + monthly_data$delta_Log_VIX + monthly_data$AFX_JPY)
+Reg_EUR <- lm(monthly_data$EUR_  ~ monthly_data$F_S_EUR + monthly_data$delta_Log_VIX + monthly_data$AFX_EUR)
+Reg_USD <- lm(monthly_data$USD_  ~ monthly_data$F_S_USD + monthly_data$delta_Log_VIX + monthly_data$AFX_USD)
+Reg_JPY <- lm(monthly_data$JPY_  ~ monthly_data$F_S_JPY + monthly_data$delta_Log_VIX + monthly_data$AFX_JPY)
 
-Reg_GBP <- lm(monthly_data$Log_diff_spot_GBP  ~ monthly_data$F_S_GBP + monthly_data$delta_Log_VIX + monthly_data$AFX_GBP)
-Reg_AUD <- lm(monthly_data$Log_diff_spot_AUD  ~ monthly_data$F_S_AUD + monthly_data$delta_Log_VIX + monthly_data$AFX_AUD)
-Reg_CAD <- lm(monthly_data$Log_diff_spot_CAD  ~ monthly_data$F_S_CAD + monthly_data$delta_Log_VIX + monthly_data$AFX_CAD)
+Reg_GBP <- lm(monthly_data$GBP_  ~ monthly_data$F_S_GBP + monthly_data$delta_Log_VIX + monthly_data$AFX_GBP)
+Reg_AUD <- lm(monthly_data$AUD_  ~ monthly_data$F_S_AUD + monthly_data$delta_Log_VIX + monthly_data$AFX_AUD)
+Reg_CAD <- lm(monthly_data$CAD_  ~ monthly_data$F_S_CAD + monthly_data$delta_Log_VIX + monthly_data$AFX_CAD)
 
-Reg_NZD <- lm(monthly_data$Log_diff_spot_NZD  ~ monthly_data$F_S_NZD + monthly_data$delta_Log_VIX + monthly_data$AFX_NZD)
-Reg_SEK <- lm(monthly_data$Log_diff_spot_SEK  ~ monthly_data$F_S_SEK + monthly_data$delta_Log_VIX + monthly_data$AFX_SEK)
-Reg_NOK <- lm(monthly_data$Log_diff_spot_NOK  ~ monthly_data$F_S_NOK + monthly_data$delta_Log_VIX + monthly_data$AFX_NOK)
+Reg_NZD <- lm(monthly_data$NZD_  ~ monthly_data$F_S_NZD + monthly_data$delta_Log_VIX + monthly_data$AFX_NZD)
+Reg_SEK <- lm(monthly_data$SEK_  ~ monthly_data$F_S_SEK + monthly_data$delta_Log_VIX + monthly_data$AFX_SEK)
+Reg_NOK <- lm(monthly_data$NOK_  ~ monthly_data$F_S_NOK + monthly_data$delta_Log_VIX + monthly_data$AFX_NOK)
 
 
 # Startgazer
-library(stargazer)
 
 
 models_list <- list(Reg_EUR, Reg_USD, Reg_JPY, Reg_GBP, Reg_AUD, Reg_CAD, Reg_NZD, Reg_SEK, Reg_NOK)
 
+# see it on text
+stargazer(models_list, title = "Regression Results", align = TRUE, type = "text", out = "regression_table.html")
 
-# Generate the table
-stargazer(models_list, title = "Regression Results", align = TRUE, type = "html", out = "regression_table.html")
+
+# Generate the table and put it on currency_risk_ch
+stargazer(models_list, title = "Regression Results ALL", align = TRUE, type = "latex", out = "regression_table_ALL.tex")
+
+sink("regression_table_ALL.tex")
+
+# Close the sink connection
+sink()
 
 
 
@@ -177,13 +200,59 @@ dw_test_NZD
 dw_test_SEK 
 dw_test_NOK 
 
-# Open sink connection to save stargazer output to a file
-sink("tables/regression_table.tex")
 
-# Your stargazer output
-stargazer(models_list, title = "Regression Results", align = TRUE, type = "latex")
+# Final Table which is paper style
 
-# Close the sink connection
+# Create a list of regression models
+regression_models <- list(Reg_EUR, Reg_USD, Reg_JPY, Reg_GBP, Reg_AUD, Reg_CAD, Reg_NZD, Reg_SEK, Reg_NOK)
+
+# Create a list of Durbin-Watson test results
+dw_tests <- list(dw_test_EUR, dw_test_USD, dw_test_JPY, dw_test_GBP, dw_test_AUD, dw_test_CAD, dw_test_NZD, dw_test_SEK, dw_test_NOK)
+
+# Create a data frame with the specified structure
+regression_results <- data.frame(
+  Currency = c("EUR", "USD", "JPY", "GBP", "AUD", "CAD", "NZD", "SEK", "NOK"),
+  Constant = rep(NA, 9),
+  F_S = rep(NA, 9),
+  VIX = rep(NA, 9),
+  AFX = rep(NA, 9),
+  DW_Test = rep(NA, 9)  # Add a new column for Durbin-Watson test
+)
+
+# Fill in the data frame with coefficients and DW test from each regression
+for (i in seq_along(regression_models)) {
+  regression_coefs <- coef(regression_models[[i]])
+  dw_statistic <- dw_tests[[i]]$statistic
+  p_value <- dw_tests[[i]]$p.value
+  
+  regression_results[i, c("Constant", "F_S", "VIX", "AFX")] <- regression_coefs[1:4]
+  regression_results[i, "DW_Test"] <- ifelse(p_value < 0.01, paste0(round(dw_statistic, 2), "***"),
+                                             ifelse(p_value < 0.05, paste0(round(dw_statistic, 2), "**"),
+                                                    ifelse(p_value < 0.1, paste0(round(dw_statistic, 2), "*"),
+                                                           paste0(round(dw_statistic, 2)))))
+}
+
+# Print the resulting data frame
+print(regression_results)
+
+# this function doesnt work
+# sink("Table_currency_and_DW.tex")
+
+
+
+#  doing a table three at the time for the final presentation
+
+models_list1 <- list(Reg_EUR, Reg_USD, Reg_JPY)
+stargazer(models_list1, title = "Regression Results 1", align = TRUE, type = "latex", out = "regression_table1_EUR_USD_JPY.tex")
+sink("regression_table_EUR_USD_JPY.tex")
 sink()
 
+models_list2 <- list(Reg_GBP, Reg_AUD, Reg_CAD)
+stargazer(models_list2, title = "Regression Results 2", align = TRUE, type = "latex", out = "regression_table_GBP_AUD_CAD.tex")
+sink("regression_table_GBP_AUD_CAD.tex")
+sink()
 
+models_list3 <- list(Reg_NZD, Reg_SEK, Reg_NOK)
+stargazer(models_list3, title = "Regression Results 3", align = TRUE, type = "latex", out = "regression_table_GBP_AUD_CAD.tex")
+sink("regression_table_NZD_SEK_NOK.tex")
+sink()
