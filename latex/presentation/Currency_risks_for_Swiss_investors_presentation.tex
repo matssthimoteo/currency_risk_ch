@@ -1,0 +1,215 @@
+\documentclass[11pt,]{beamer}
+\graphicspath{{Images/}{./}}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cite}
+\renewcommand\citeleft{}
+\renewcommand\citeright{}
+\usepackage{ragged2e}
+\usepackage{array}
+%----------------------------------------------------------------------------------------
+\usetheme{Madrid}
+\usecolortheme{dolphin}
+\usefonttheme{default}
+\usepackage{palatino}
+\usepackage[default]{opensans}
+\useoutertheme{default}
+%----------------------------------------------------------------------------------------
+\makeatletter
+\renewcommand\@biblabel[1]{}
+\renewenvironment{thebibliography}[1]
+     {\section*{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{}%
+           {\leftmargin0pt
+           \advance\leftmargin2em
+           \setlength\itemindent{-2em}
+            \@openbib@code
+            \usecounter{enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
+%----------------------------------------------------------------------------------------
+\newcommand*{\eqcite}[1]{%
+  \vadjust{%
+    \medskip
+    \scriptsize
+    \hbox to \linewidth{\hfill\textit{\cite{#1}}}%
+  }%
+}
+%----------------------------------------------------------------------------------------
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+%----------------------------------------------------------------------------------------
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+%----------------------------------------------------------------------------------------
+\hypersetup{
+colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=black,
+}
+%----------------------------------------------------------------------------------------
+\title[Currency risks]{Currency risks for Swiss investors}
+%\subtitle{Digital Tool for Finance}
+\author[Meier \and Merki \and Thimóteo]{\href{mailto:thomaswilhelm.meier@uzh.ch}{Thomas Meier} \and \href{mailto:ivo.merki@uzh.ch}{Ivo Merki} \and \href{mailto:mateus.siqueirathimoteo@uzh.ch}{Mateus Thimóteo}}
+\institute[UZH]{University of Zurich \\ \smallskip}
+\date[December 22, 2023]{Presentation Digital Tool for Finance \\December 22, 2023}
+%----------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\titlepage
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Presentation Overview}
+    \tableofcontents 
+\end{frame}
+%----------------------------------------------------------------------------------------
+\section{Introduction}
+\subsection{Motivation}
+\subsection{Safe haven currency}
+\subsection{Research question}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Motivation}
+	\begin{figure}
+		\includegraphics[width=0.8\linewidth]{figures/ccy_perfs.jpg}
+		\caption{Returns in different currencies}
+	\end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+    \frametitle{Safe haven currency}
+	
+	Sed iaculis \alert{dapibus gravida}. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.
+	
+	\bigskip
+	
+	% Quote example
+	\begin{quote}
+		Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio.\\
+		--- Someone, somewhere\ldots
+	\end{quote}
+	
+	\bigskip % Vertical whitespace
+	
+	Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis.
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Research question}
+	
+	Sed iaculis \alert{dapibus gravida}. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.
+	
+	\bigskip
+	
+	% Quote example
+	\begin{quote}
+		Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio.\\
+		--- Someone, somewhere\ldots
+	\end{quote}
+	
+	\bigskip % Vertical whitespace
+	
+	Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis.
+\end{frame}
+%----------------------------------------------------------------------------------------
+\section{Analysis}
+\subsection{Data}
+\subsection{Model}
+\subsection{Results}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Data}
+\end{frame} 
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Model}
+
+	\begin{equation}
+		\Delta s_{t+1}^k=\alpha^k+\beta_{0}^k(f_{t}^k-s_{t}^k)+\beta_{1}^k AFX_{t+1}+\beta_{2}^k\Delta VIX_{t+1}+\epsilon_{t+1}^k
+	    \eqcite{Grisse and Nitschka 2015}
+    \end{equation}
+
+    \bigskip
+    \begin{center}
+    \begin{conditions}
+    $\Delta s_{t+1}^k$ & change log spot exchange rates of currencies\\    
+    $f_{t}^k$ & log forward exchange rate\\    
+    $AFX_{t+1}$ & average CHF exchange rate changes\\    
+    $\Delta VIX_{t+1}$ & log changes VIX\\      
+    \end{conditions}
+    \end{center}
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Results}
+	\framesubtitle{EUR \ USD \ JPY}
+    \begin{center}
+    \scalebox{0.45}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_EUR_USD_JPY}%
+    \unskip}
+    \end{center}
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Results}
+	\framesubtitle{GBP \ AUD \ CAD}
+    \begin{center}
+	\scalebox{0.45}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_GBP_AUD_CAD}%
+    \unskip}
+    \end{center}
+\end{frame}
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Results}
+	\framesubtitle{NZD \ SEK \ NOK}
+    \begin{center}
+	\scalebox{0.45}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_NZD_SEK_NOK}%
+    \unskip}
+    \end{center}
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\section{Appendix}
+\subsection{References}
+%----------------------------------------------------------------------------------------
+\begin{frame}[t] % Use [allowframebreaks] to allow automatic splitting across slides if the content is too long
+	\frametitle{References}
+	\setbeamertemplate{bibliography item}{}
+	\begin{thebibliography}{99}
+		\footnotesize
+
+        \bibitem[Akram, Rime, and Sarno (2008)]{Akram and Rime and Sarno 2008}\href{https://doi.org/10.1016/j.jinteco.2008.07.004}{Akram, Q. Farooq, Dagfinn Rime, and Lucio Sarno, 2008, Arbitrage in the foreign exchange market: Turning on the microscope, pp. 237--253 in \textit{Journal of International Economics}, Vol. 76, No. 2, December.}
+  
+		\bibitem[Grisse and Nitschka (2015)]{Grisse and Nitschka 2015}\href{https://doi.org/10.1016/j.jempfin.2015.03.006}{Grisse, Christian, and Thomas Nitschka, 2013, On financial risk and the safe haven characteristics of Swiss franc exchange rates, pp. 153--164 in \textit{Journal of Empirical Finance}, Vol. 32, June.}
+			
+		\bibitem[Habib and Stracca (2012)]{Habib and Stracca 2012}\href{https://doi.org/10.1016/j.jinteco.2011.12.005}{Habib, Maurizio M., and Livio Stracca, 2012, Getting beyond carry trade: What makes a safe haven currency?, pp. 50--64 in \textit{Journal of International Economics}, Vol. 87, No. 1, May.}
+ 
+	\end{thebibliography}
+\end{frame}
+%----------------------------------------------------------------------------------------
+\end{document} 

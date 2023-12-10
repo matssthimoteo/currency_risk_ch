@@ -6,7 +6,10 @@
 \usepackage{fancyhdr}
 \usepackage{mathrsfs}
 \usepackage{amsmath}
+\usepackage{amssymb}
 
+\DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
 
 \usepackage{titlesec}
 \titleformat{\chapter}{\bfseries\LARGE}{\thechapter~}{1em}{}
@@ -97,6 +100,7 @@
 \item[FRED] Federal Reserve Economic Data 
 \item[OECD] Organisation for Economic Co-operation and Development
 \item[SNB] Swiss National Bank
+\item[UIP] Uncovered interest rate parity
 \item[USD] US dollar
 \item[VIX] CBOE Volatility Index
 \end{Abbreviations}
@@ -120,10 +124,47 @@ The paper is structured as follows. Section \ref{Theoretical background} briefly
 
   
 \section{Theoretical background}\label{Theoretical background}
-\subsection{Uncovered Interest Rate Parity}\label{Uncovered Interest Rate Parity}
+This section aims to provide a very brief theoretical background to guide the reader through the analysis in the following section \ref{Analysis}.\par   
+
+\subsection{Uncovered interest rate parity}\label{Uncovered interest rate parity}
+The uncovered interest rate parity (UIP) states under the assumption of rational expectations and risk-neutrality an equality between the expected exchange rates change and the previous period`s interest rate differential between two countries (\cite{Grisse and Nitschka 2015}). This is expressed in the following formula \ref{1}.\par  
+
 \begin{equation}\label{1}
-\mathcal{F}_{t,k}=S_{t}\frac{(1+i_{t,k})^k}{(1+i_{t,k}^*)^k}
+\EX_{t}(\Delta s_{t+1}^k)= i_{t}^k-i_{t}^*
 \end{equation}
+
+where $\Delta s_{t+1}^k$ represents the change in the log spot exchange rates of the currencies, $i_{t}^k$ the foreign interest rate in country $k$, and $i_{t}^*$ the domestic interest rate.\par
+
+Based on the findings of \cite{Akram and Rime and Sarno 2008} we consider as well as \cite{Grisse and Nitschka 2015} an approximate equality between monthly interest rate differentials and monthly forward discounts leading to the following formula \ref{2}.
+
+\begin{equation}\label{2}
+i_{t}^k-i_{t}^* \approx f_{t}^k-s_{t}^k
+\end{equation}
+
+where $f_{t}^k$ represents the log forward exchange rate. This results in the following model for the UIP regression:
+
+\begin{equation}\label{3}
+\Delta s_{t+1}^k=\alpha^k+\beta^k(f_{t}^k-s_{t}^k)+\epsilon_{t+1}^k
+\end{equation}
+
+where under the assumption that UIP holds, $\beta$ should be equal to one and $\alpha$ equal to zero. Due to limitations in the access of forward exchange rates, they were calculated with the following formula \ref{4}: 
+\begin{equation}\label{4}
+\mathcal{F}_{t,n}=S_{t}\frac{(1+i_{t,n}^*)^n}{(1+i_{t,n})^n}
+\end{equation}
+
+where $\mathcal{F}_{t,n}$ represents the forward exchange rate at time $t$ with maturity $n$, $S_{t}$ the spot exchange rate at time $t$, $i_{t,n}^*$ the domestic interest rate at time $t$ with maturity $n$, $i_{t,n}$ the foreign interest rate at time $t$ with maturity $n$. 
+
+\subsection{Incorporation of currency risk factors}
+The lack of empirical support for the holding of the UIP, as mentioned by \cite{Grisse and Nitschka 2015}, demands for a solution. \cite{Verdelhan 2010} presents a feasible solution though incorporating currency risk factors into the UIP regression and therefore augmenting it. \cite{Grisse and Nitschka 2015} developed such an augmented model based on the work of \cite{Lustig and Roussanov and Verdelhan 2011} by incorporating an additional currency-specific risk factor and a global risk measurement on currency markets. While the currency-specific risk factor (\emph{AFX}) captures the average CHF exchange rate change across different CHF exchange rate pairs, the global risk measurement on currency markets is approximated by the \emph{VIX} due to its highly positive correlation (\cite{Grisse and Nitschka 2015}). By adding the previously mentioned additional risk factors to the regression it takes the following form
+
+\begin{equation}\label{5}
+\Delta s_{t+1}^k=\alpha^k+\beta_{0}^k(f_{t}^k-s_{t}^k)+\beta_{1}^k AFX_{t+1}+\beta_{2}^k\Delta VIX_{t+1}+\epsilon_{t+1}^k
+\end{equation}
+
+where $AFX_{t+1}$ represents the arithmetic average of the CHF exchange rate changes (without currency $k$) and $\Delta VIX_{t+1}$ the log changes in the VIX.\par
+
+
+
 
 \section{Data}\label{Data}
 The time span (April 2002 to November 2023) of the data is limited by the data series for Japan. This renders the bridge solution for the euro (EUR), as presented in \cite{Grisse and Nitschka 2015}, redundant. The exchange rates were retrieved as end of the month US dollar (USD) cross-rates from the Federal Reserve Economic Data (FRED) and converted into end of the month CHF exchange rates. The short-term interest rates were retrieved monthly as end of the month from the Organisation for Economic Co-operation and Development (OECD) database. The Chicago Board Options Exchange (CBOE) Volatility Index (VIX) was also retrieved monthly as end of the month from FRED.\par
@@ -132,10 +173,73 @@ The time span (April 2002 to November 2023) of the data is limited by the data s
 
 \section{Analysis}\label{Analysis}
 slides 21/90
+
 \subsection{Model}\label{Model}
-\begin{equation}\label{2}
+\begin{equation}\label{5}
 \Delta s_{t+1}^k=\alpha^k+\beta_{0}^k(f_{t}^k-s_{t}^k)+\beta_{1}^k AFX_{t+1}+\beta_{2}^k\Delta VIX_{t+1}+\epsilon_{t+1}^k
 \end{equation}
+
+( the forward rate f is the log forward discount. From equation (4): since the data is annualized for each period, we used for n 1/12 and convert the result in percentage.)
+
+
+\subsection{Results}\label{Results}
+There are some similarity with the paper from the SNB.
+The constant alpha keeps the same proportion and for the Beta0 (f-s) is close to one, this means that the deviation is not theoretically correct but close to the reality. we also see that they are not significant. 
+
+shows that other countries exhibits safe haven characteristics against the swiss francs, a Negative coefficient indicate that the Swiss franc depreciate against other currency, which is the case with NZD AUD with the larger impact and then SEK and NOK , if we take only the significant results. A positive coefficient means that the currency  appreciate the swiss franc when the risk increase. The USD and the JPY yen are relatively the biggest impact. It is coeherent with the paper, since it was written that the siss franc was not a safe haven for thoses two currency. Thoses currency provide a better hedge against global risk.
+
+The AFX is from a range of -0.5 to -1.3. Since the swiss currency is the domestic one, the effect is negative and is slightly higher than in the paper. Same conclusion can be drawn for the closness of Switzerland and the euro aera and the same negative rate for the JPY can explain the poor effect on the swiss.
+
+( The Darwin-Watson test (DW) is meant to check for autocorrelation in the data. By running the test for all the currency we no there is no strong evidence for autocorrelation. P-values are too large and the values ( between 1.92-2.13)  correspond to the paper SNB (1.7-224).)
+
+Given the larger period, we have some closed similarities with the paper from the SNB.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ccy_perfs.jpg}
+    \caption{Returns in different currencies}
+    \label{fig:}
+\end{figure}
+
+
+
+\begin{center}
+	\scalebox{0.75}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_EUR_USD_JPY}%
+    \unskip}
+\end{center}
+
+\begin{center}
+	\scalebox{0.75}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_GBP_AUD_CAD}%
+    \unskip}
+\end{center}
+
+\begin{center}
+	\scalebox{0.75}{%
+    \renewenvironment{table}[1][]{\ignorespaces}{\unskip}%
+    \input{tables/regression_table_NZD_SEK_NOK}%
+    \unskip}
+\end{center}
+
+
+
+
+
+
+%\begingroup
+%\begin{table}
+%\let\center\empty
+%\let\endcenter\relax
+%\centering
+%\input{regression_table.tex}
+%\resizebox{.5\width}{!}{\input{regression_table.tex}}
+%\end{table}
+%\endgroup
+
+
+
 \section{Conclusion}\label{Conclusion}
 
 
@@ -144,6 +248,8 @@ slides 21/90
 \renewcommand{\refname}{Bibliography}
 \addcontentsline{toc}{section}{Bibliography}
 \begin{thebibliography}{99}
+
+\bibitem[Akram, Rime, and Sarno (2008)]{Akram and Rime and Sarno 2008}\href{https://doi.org/10.1016/j.jinteco.2008.07.004}{Akram, Q. Farooq, Dagfinn Rime, and Lucio Sarno, 2008, Arbitrage in the foreign exchange market: Turning on the microscope, pp. 237--253 in \textit{Journal of International Economics}, Vol. 76, No. 2, December.}
 
 \bibitem[Backus, Foresi, and Telmer (2001)]{Backus and Foresi and Telmer 2001}\href{https://doi.org/10.1111/0022-1082.00325}{Backus, David K., Silverio Foresi, and Chris I. Telmer, 2001, Affine Term Structure Models and the Forward Premium Anomaly, pp. 279--304 in \textit{Journal of Finance}, Vol. 56, No. 1, February.}
 
