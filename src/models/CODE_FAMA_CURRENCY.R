@@ -154,14 +154,11 @@ Reg_NOK <- lm(monthly_data$NOK_  ~ monthly_data$F_S_NOK + monthly_data$delta_Log
 
 models_list <- list(Reg_EUR, Reg_USD, Reg_JPY, Reg_GBP, Reg_AUD, Reg_CAD, Reg_NZD, Reg_SEK, Reg_NOK)
 
-# see it on text
-stargazer(models_list, title = "Regression Results", align = TRUE, type = "text", out = "regression_table.html")
-
 
 # Generate the table and put it on currency_risk_ch
 stargazer(models_list, title = "Regression Results ALL", align = TRUE, type = "latex", out = "latex/tables/regression_table_ALL.tex")
 
-sink("regression_table_ALL.tex")
+sink("latex/tables/regression_table_ALL.tex")
 
 # Close the sink connection
 sink()
@@ -243,16 +240,18 @@ print(regression_results)
 #  doing a table three at the time for the final presentation
 
 models_list1 <- list(Reg_EUR, Reg_USD, Reg_JPY)
-stargazer(models_list1, title = "Regression Results 1", align = TRUE, type = "latex", out = "latex/tables/regression_table1_EUR_USD_JPY.tex")
-sink("regression_table_EUR_USD_JPY.tex")
+stargazer(models_list1, align = TRUE, type = "latex", out = "latex/tables/regression_table_EUR_USD_JPY.tex")
+sink("latex/tables/regression_table_EUR_USD_JPY.tex")
 sink()
 
 models_list2 <- list(Reg_GBP, Reg_AUD, Reg_CAD)
-stargazer(models_list2, title = "Regression Results 2", align = TRUE, type = "latex", out = "latex/tables/regression_table_GBP_AUD_CAD.tex")
-sink("regression_table_GBP_AUD_CAD.tex")
+stargazer(models_list2, align = TRUE, type = "latex", out = "latex/tables/regression_table_GBP_AUD_CAD.tex")
+sink("latex/tables/regression_table_GBP_AUD_CAD.tex")
 sink()
 
 models_list3 <- list(Reg_NZD, Reg_SEK, Reg_NOK)
-stargazer(models_list3, title = "Regression Results 3", align = TRUE, type = "latex", out = "latex/tables/regression_table_NZD_SEK_NOK.tex")
-sink("regression_table_NZD_SEK_NOK.tex")
+stargazer(models_list3, align = TRUE, type = "latex", out = "latex/tables/regression_table_NZD_SEK_NOK.tex")
+sink("latex/tables/regression_table_NZD_SEK_NOK.tex")
 sink()
+
+# title = "Regression Results "
