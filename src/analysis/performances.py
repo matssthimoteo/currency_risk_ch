@@ -30,7 +30,7 @@ def plot_performances(returns: pd.DataFrame,
     plt.ylabel('FX_t / FX_0')
     plt.xlabel('Time')
     if save:
-        plt.savefig(f'reports/figures/{fig_name}')
+        plt.savefig(f'latex/figures/{fig_name}')
     plt.show()
     plt.close()
 
