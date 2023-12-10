@@ -27,6 +27,8 @@ def plot_performances(returns: pd.DataFrame,
     (1+returns).cumprod().plot(figsize=(12, 8), title=title)
     if use_semilogy:
         plt.semilogy()
+    plt.ylabel('FX_t / FX_0')
+    plt.xlabel('Time')
     if save:
         plt.savefig(f'reports/figures/{fig_name}')
     plt.show()
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     plot_performances(returns,
                       save=True,
                       fig_name='ccy_perfs.jpg',
-                      title='FX market in CHF')
+                      )
     # Plot carry FX excess performances
     plot_performances(carry_fx_xs_returns,
                       save=True,
