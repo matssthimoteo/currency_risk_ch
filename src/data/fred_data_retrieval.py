@@ -16,7 +16,9 @@ def download(start_date: pd.Timestamp = pd.Timestamp('2002-04-01'),
         'NZDUSD': 'DEXUSNZ',
         'USDSEK': 'DEXSDUS',
         'USDNOK': 'DEXNOUS',
-        'VIX': 'VIXCLS'
+        'VIX': 'VIXCLS',
+        'DE10y': 'IRLTLT01DEM156N',
+        'IT10y': 'IRLTLT01ITM156N'
 
     }
 
@@ -79,6 +81,7 @@ def download(start_date: pd.Timestamp = pd.Timestamp('2002-04-01'),
     df_chf['SEK'] = df['USDCHF'] / df['USDSEK']
     df_chf['NOK'] = df['USDCHF'] / df['USDNOK']
     df_chf['VIX'] = df['VIX']
+    df_chf['IT_minus_DE'] = df['IT10y'] - df['DE10y']
 
 
 
