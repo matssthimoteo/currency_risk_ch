@@ -5,9 +5,8 @@
      1. [Motivation](#motivation)
      2. [Research question](#question)
 2. [Requirements](#requirements)
-    1. [Environment variable](#variable)
-    2. [Environment virtual](#virtual)
-    3. [Tbd](#tbd)
+    1. [Virtual environments](#environments)
+    2. [Tbd](#tbd)
 3. [Results](#results)
 ______________________________________
 
@@ -27,12 +26,7 @@ hold for a Swiss resident?**
 _____________________________________
 ## Requirements
 
-### Environment variable
-
-```bash
-
-```
-### Environment virtual
+### Virtual environments
 This project's code is partially in R and partially in Python. It's necessary to have an R version >=3.0.0, which can be installed (in Windows) with:
 ```batch
 @echo off
@@ -55,10 +49,10 @@ del R-4.1.2-win.exe
 
 The execution of the R script in this project installs already the required dependencies.
 
-For the python environment, the setup is made through running a setup file.
+For the python environment, the setup is made through running a setup file. It supposes that the computer has conda installed and will install the dependencies described on "requirements.txt".
 
 Windows:
-```bah
+```batch
 setup.bat
 ```
 
@@ -67,11 +61,6 @@ Linux / MacOS:
 setup.sh
 ```
 
-### Tbd
-
-```bash
-
-```
 ______________________________________
 ## Results
 Results are shown in [walkthrough](walkthrough.ipynb).
