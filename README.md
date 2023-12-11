@@ -5,7 +5,7 @@
      1. [Motivation](#motivation)
      2. [Research question](#question)
 2. [Requirements](#requirements)
-    1. [Evironment variable](#variable)
+    1. [Environment variable](#variable)
     2. [Environment virtual](#virtual)
     3. [Tbd](#tbd)
 3. [Results](#results)
@@ -27,16 +27,46 @@ hold for a Swiss resident?**
 _____________________________________
 ## Requirements
 
-### Evironment variable
+### Environment variable
 
 ```bash
 
 ```
-### Evironment virtual
+### Environment virtual
+This project's code is partially in R and partially in Python. It's necessary to have an R version >=3.0.0, which can be installed (in Windows) with:
+```batch
+@echo off
 
-```bash
+REM Set the path where R will be installed
+set R_INSTALL_PATH=C:\Program Files\R\R-4.1.2
 
+REM Download the R installer
+curl -O https://cran.r-project.org/bin/windows/base/R-4.1.2-win.exe
+
+REM Install R silently
+start /wait R-4.1.2-win.exe /S /SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /DIR=%R_INSTALL_PATH%
+
+REM Add R to the system PATH
+setx PATH "%PATH%;%R_INSTALL_PATH%\bin\x64" /M
+
+REM Clean up
+del R-4.1.2-win.exe
 ```
+
+The execution of the R script in this project installs already the required dependencies.
+
+For the python environment, the setup is made through running a setup file.
+
+Windows:
+```bah
+setup.bat
+```
+
+Linux / MacOS:
+```bash
+setup.sh
+```
+
 ### Tbd
 
 ```bash
