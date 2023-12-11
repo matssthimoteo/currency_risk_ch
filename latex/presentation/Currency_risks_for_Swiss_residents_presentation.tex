@@ -66,11 +66,11 @@ colorlinks=true,
     urlcolor=black,
 }
 %----------------------------------------------------------------------------------------
-\title[Currency risks]{Currency risks for Swiss investors}
+\title[Currency risks CH residents]{Currency risks for Swiss residents}
 %\subtitle{Digital Tool for Finance}
 \author[Meier \and Merki \and Thimóteo]{\href{mailto:thomaswilhelm.meier@uzh.ch}{Thomas Meier} \and \href{mailto:ivo.merki@uzh.ch}{Ivo Merki} \and \href{mailto:mateus.siqueirathimoteo@uzh.ch}{Mateus Thimóteo}}
 \institute[UZH]{University of Zurich \\ \smallskip}
-\date[December 22, 2023]{Presentation Digital Tool for Finance \\December 22, 2023}
+\date[December 22, 2023]{Presentation Digital Tools for Finance \\ \smallskip {\footnotesize December 22, 2023}}
 %----------------------------------------------------------------------------------------
 \begin{document}
 %----------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ colorlinks=true,
 %----------------------------------------------------------------------------------------
 \section{Introduction}
 \subsection{Motivation}
-\subsection{Safe haven currency}
+\subsection{Safe haven currencies}
 \subsection{Research question}
 %----------------------------------------------------------------------------------------
 \begin{frame}
@@ -97,39 +97,22 @@ colorlinks=true,
 \end{frame}
 %----------------------------------------------------------------------------------------
 \begin{frame}
-    \frametitle{Safe haven currency}
-	
-	Sed iaculis \alert{dapibus gravida}. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.
-	
-	\bigskip
-	
-	% Quote example
-	\begin{quote}
-		Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio.\\
-		--- Someone, somewhere\ldots
-	\end{quote}
-	
-	\bigskip % Vertical whitespace
-	
-	Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis.
+    \frametitle{Safe haven currencies}
+    \begin{itemize}
+    \setlength\itemsep{2em}
+    \item Safe haven characteristics by \cite{Habib and Stracca 2012}
+    \item Implications for residents of safe haven currency countries 
+    \item CHF a safe haven currency
+    \end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------------------
 \begin{frame}
 	\frametitle{Research question}
-	
-	Sed iaculis \alert{dapibus gravida}. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.
-	
 	\bigskip
-	
-	% Quote example
 	\begin{quote}
-		Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio.\\
-		--- Someone, somewhere\ldots
+    {\Large Which of the G10 currencies is the riskiest to hold for a Swiss resident?}
 	\end{quote}
-	
-	\bigskip % Vertical whitespace
-	
-	Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis.
+	\bigskip
 \end{frame}
 %----------------------------------------------------------------------------------------
 \section{Analysis}
@@ -137,8 +120,21 @@ colorlinks=true,
 \subsection{Model}
 \subsection{Results}
 %----------------------------------------------------------------------------------------
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Data}
+ \begin{itemize}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwRm}{USD/CHF Spot Exchange Rate from FRED} 
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwLK}{EUR/USD Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwNJ}{USD/JPY Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwOd}{GBP/USD Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwOA}{AUD/USD Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwOW}{USD/CAD Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwPf}{NZD/USD Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwPD}{USD/SEK Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwPN}{USD/NOK Spot Exchange Rate from FRED}
+ \item \href{https://fred.stlouisfed.org/graph/?g=1cwPY}{VIX from FRED}
+ \item \href{https://data.oecd.org/chart/7hSF}{Short-term Interest Rates from OECD}
+ \end{itemize}
 \end{frame} 
 %----------------------------------------------------------------------------------------
 \begin{frame}
@@ -149,7 +145,7 @@ colorlinks=true,
 	    \eqcite{Grisse and Nitschka 2015}
     \end{equation}
 
-    \bigskip
+    \medskip
     \begin{center}
     \begin{conditions}
     $\Delta s_{t+1}^k$ & change log spot exchange rates of currencies\\    
@@ -203,7 +199,7 @@ colorlinks=true,
 	\begin{thebibliography}{99}
 		\footnotesize
 
-        \bibitem[Akram, Rime, and Sarno (2008)]{Akram and Rime and Sarno 2008}\href{https://doi.org/10.1016/j.jinteco.2008.07.004}{Akram, Q. Farooq, Dagfinn Rime, and Lucio Sarno, 2008, Arbitrage in the foreign exchange market: Turning on the microscope, pp. 237--253 in \textit{Journal of International Economics}, Vol. 76, No. 2, December.}
+        %\bibitem[Akram, Rime, and Sarno (2008)]{Akram and Rime and Sarno 2008}\href{https://doi.org/10.1016/j.jinteco.2008.07.004}{Akram, Q. Farooq, Dagfinn Rime, and Lucio Sarno, 2008, Arbitrage in the foreign exchange market: Turning on the microscope, pp. 237--253 in \textit{Journal of International Economics}, Vol. 76, No. 2, December.}
   
 		\bibitem[Grisse and Nitschka (2015)]{Grisse and Nitschka 2015}\href{https://doi.org/10.1016/j.jempfin.2015.03.006}{Grisse, Christian, and Thomas Nitschka, 2013, On financial risk and the safe haven characteristics of Swiss franc exchange rates, pp. 153--164 in \textit{Journal of Empirical Finance}, Vol. 32, June.}
 			
