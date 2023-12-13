@@ -20,11 +20,17 @@ library(readr)
 library(lmtest)
 library(stargazer)
 
+
+# Monthly_data analysis
+library(dplyr)
+library(readr)
+library(lmtest)
+library(stargazer)
+
 monthly_data <- read_csv("data/processed/monthly_data.csv")
-#View(monthly_data)
+head(monthly_data)
 
 # ____
-
 #_______________________VIX
 # we have to take the difference and log it
 
@@ -181,7 +187,7 @@ dw_test_NOK <- dwtest(Reg_NOK)
 # Print the test results
 
 
-dw_test_EUR 
+c 
 dw_test_USD 
 dw_test_JPY 
 
@@ -192,7 +198,6 @@ dw_test_CAD
 dw_test_NZD
 dw_test_SEK 
 dw_test_NOK 
-
 
 # Final Table which is paper style
 
@@ -247,3 +252,39 @@ stargazer(models_list3, align = TRUE, type = "latex", out = "latex/tables/regres
 
 
 # title = "Regression Results "
+
+
+#  Robust regression
+
+monthly_data$spread <- monthly_data$IT_minus_DE
+
+Reg_EUR_R <- lm(monthly_data$EUR_  ~ monthly_data$F_S_EUR + monthly_data$delta_Log_VIX + monthly_data$AFX_EUR + monthly_data$spread)
+Reg_USD_R <- lm(monthly_data$USD_  ~ monthly_data$F_S_USD + monthly_data$delta_Log_VIX + monthly_data$AFX_USD + monthly_data$spread)
+Reg_JPY_R <- lm(monthly_data$JPY_  ~ monthly_data$F_S_JPY + monthly_data$delta_Log_VIX + monthly_data$AFX_JPY + monthly_data$spread)
+
+Reg_GBP_R <- lm(monthly_data$GBP_  ~ monthly_data$F_S_GBP + monthly_data$delta_Log_VIX + monthly_data$AFX_GBP + monthly_data$spread)
+Reg_AUD_R <- lm(monthly_data$AUD_  ~ monthly_data$F_S_AUD + monthly_data$delta_Log_VIX + monthly_data$AFX_AUD + monthly_data$spread)
+Reg_CAD_R <- lm(monthly_data$CAD_  ~ monthly_data$F_S_CAD + monthly_data$delta_Log_VIX + monthly_data$AFX_CAD + monthly_data$spread)
+
+Reg_NZD_R <- lm(monthly_data$NZD_  ~ monthly_data$F_S_NZD + monthly_data$delta_Log_VIX + monthly_data$AFX_NZD + monthly_data$spread)
+Reg_SEK_R <- lm(monthly_data$SEK_  ~ monthly_data$F_S_SEK + monthly_data$delta_Log_VIX + monthly_data$AFX_SEK + monthly_data$spread)
+Reg_NOK_R <- lm(monthly_data$NOK_  ~ monthly_data$F_S_NOK + monthly_data$delta_Log_VIX + monthly_data$AFX_NOK + monthly_data$spread)
+
+#  List Robust regression
+
+models_list_Robust1 <- list(Reg_EUR_R, Reg_USD_R, Reg_JPY_R)
+stargazer(models_list_Robust1, align = TRUE, type = "text", out = "latex/tables/regression_table_EUR_USD_JPY_R.tex")
+
+models_list_Robust2 <- list( Reg_GBP_R, Reg_AUD_R, Reg_CAD_R)
+stargazer(models_list_Robust2, align = TRUE, type = "text", out = "latex/tables/regression_table_GBP_AUD_CAD_R.tex")
+
+models_list_Robust3 <- list( Reg_NZD_R, Reg_SEK_R, Reg_NOK_R)
+stargazer(models_list_Robust3, align = TRUE, type = "text", out = "latex/tables/regression_table_NZD_SEK_NOK_R.tex")
+
+
+head(monthly_data$IT_minus_DE)
+head(monthly_data$spread)
+
+
+
+
