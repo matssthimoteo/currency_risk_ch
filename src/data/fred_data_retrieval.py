@@ -18,9 +18,12 @@ def download(start_date: pd.Timestamp = pd.Timestamp('2002-04-01'),
         'USDNOK': 'DEXNOUS',
         'VIX': 'VIXCLS',
         'DE10y': 'IRLTLT01DEM156N',
-        'IT10y': 'IRLTLT01ITM156N'
+        'IT10y': 'IRLTLT01ITM156N',
+        'TED_spread': 'TEDRATE'
 
     }
+
+    last_ted_data_date = '2022-01-31'
 
     # Dataframe to save results
     df = pd.DataFrame()
@@ -82,6 +85,8 @@ def download(start_date: pd.Timestamp = pd.Timestamp('2002-04-01'),
     df_chf['NOK'] = df['USDCHF'] / df['USDNOK']
     df_chf['VIX'] = df['VIX']
     df_chf['IT_minus_DE'] = df['IT10y'] - df['DE10y']
+    df_chf['TED_spread'] = df['TED_spread']
+    df_chf['TED_spread'].loc[pd.Timestamp(last_ted_data_date) + pd.Timedelta(days=1):] = np.nan
 
 
 

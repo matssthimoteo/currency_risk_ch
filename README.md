@@ -6,7 +6,6 @@
      2. [Research question](#question)
 2. [Requirements](#requirements)
     1. [Virtual environments](#environments)
-    2. [Tbd](#tbd)
         1. [R](#r)
         2. [Python](#python)
 3. [Results](#results)
