@@ -241,14 +241,14 @@ print(regression_results)
 #  doing a table three at the time for the final presentation
 
 models_list1 <- list(Reg_EUR, Reg_USD, Reg_JPY)
-stargazer(models_list1, align = TRUE, type = "latex", out = "latex/tables/regression_table_EUR_USD_JPY.tex")
+stargazer(models_list1, align = TRUE, type = "latex", out = "latex/tables/regression_table_EUR_USD_JPY.tex",title = "Regression Table EUR USD JPY.")
 
 
 models_list2 <- list(Reg_GBP, Reg_AUD, Reg_CAD)
-stargazer(models_list2, align = TRUE, type = "latex", out = "latex/tables/regression_table_GBP_AUD_CAD.tex")
+stargazer(models_list2, align = TRUE, type = "latex", out = "latex/tables/regression_table_GBP_AUD_CAD.tex",title = "Regression Table GBP AUD CAD.")
 
 models_list3 <- list(Reg_NZD, Reg_SEK, Reg_NOK)
-stargazer(models_list3, align = TRUE, type = "latex", out = "latex/tables/regression_table_NZD_SEK_NOK.tex")
+stargazer(models_list3, align = TRUE, type = "latex", out = "latex/tables/regression_table_NZD_SEK_NOK.tex",title = "Regression Table NZD SEK NOK.")
 
 
 # title = "Regression Results "
