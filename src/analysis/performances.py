@@ -79,7 +79,7 @@ def get_covariance_matrix(returns: pd.DataFrame,
                           currencies_list: List[str] = None):
     return returns[currencies_list].cov()
 
-def get_covrrelation_matrix(returns: pd.DataFrame,
+def get_correlation_matrix(returns: pd.DataFrame,
                           currencies_list: List[str] = None):
     return returns[currencies_list].corr()
 
@@ -87,8 +87,8 @@ def plot_eigenvector_components(matrix: pd.DataFrame,
                                 currencies_list: List[str] = None,
                                 component: int = 0):
     plt.figure()
-    plt.bar(currencies_list, pd.DataFrame(-np.linalg.eig(matrix.loc[currencies_list, currencies_list])[component],
-                        index=currencies_list)[0])
+    plt.bar(currencies_list, pd.DataFrame(-np.linalg.eig(matrix.loc[currencies_list, currencies_list])[1],
+                        index=currencies_list)[component])
     plt.title('Eigenvector loadings on each G10/CHF pair')
     plt.show()
 
